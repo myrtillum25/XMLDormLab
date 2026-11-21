@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dormitory name="Гуртожиток №16 КНУ ім. Тараса Шевченка" address="вул. Васильківська, 94">
+
+	<Student fullName="Іваненко Іван Іванович"
+			 faculty="ФКНК"
+			 department="Інформатика"
+			 roomNumber="405"
+			 course="2"
+			 checkInDate="2024-08-28"
+			 isRoomHead="true"
+			 benefit="Дитина учасника бойових дій"
+			 phone="+380501112233" />
+
+	<Student fullName="Петренко Петро Олексійович"
+			 faculty="ФКНК"
+			 department="Прикладна математика"
+			 roomNumber="405"
+			 course="2"
+			 checkInDate="2024-08-29" />
+
+	<Student fullName="Коваленко Марія Василівна"
+			 faculty="Мехмат"
+			 department="Математика"
+			 roomNumber="312"
+			 course="3"
+			 checkInDate="2023-08-30"
+			 isRoomHead="true"
+			 phone="+380674445566" />
+
+	<Student fullName="Сидоренко Андрій Сергійович"
+			 faculty="ФКНК"
+			 department="Інформатика"
+			 roomNumber="218"
+			 course="1"
+			 checkInDate="2025-08-27"
+			 benefit="Сирота" />
+
+	<Student fullName="Мельник Ольга Дмитрівна"
+			 faculty="ФРЕКС"
+			 department="Радіофізика"
+			 roomNumber="501"
+			 course="4"
+			 checkInDate="2022-08-25" />
+
+	<Student fullName="Бондаренко Денис Вікторович"
+			 faculty="Мехмат"
+			 department="Статистика"
+			 roomNumber="312"
+			 course="3"
+			 checkInDate="2023-08-31"
+			 benefit="Малозабезпечена сім'я" />
+
+	<Student fullName="Шевченко Софія Олександрівна"
+			 faculty="ФКНК"
+			 department="Інформатика"
+			 roomNumber="405"
+			 course="2"
+			 checkInDate="2024-08-28" />
+
+</Dormitory>
