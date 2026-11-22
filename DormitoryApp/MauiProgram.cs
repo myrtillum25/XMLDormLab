@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace DormintoryApp
+namespace DormitoryApp
 {
     public static class MauiProgram
     {

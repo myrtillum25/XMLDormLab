@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DormitoryApp.MainPage"
+             Title="ІС «Гуртожиток» — Аналіз та обробка XML">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Заголовок програми -->
+            <Label Text="🏢 Система обліку мешканців гуртожитку"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <!-- Блок 1: Вибір XML файлу -->
+            <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="1. Файл бази даних XML" FontAttributes="Bold" FontSize="15"/>
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                        <Entry x:Name="FilePathEntry" 
+                               Placeholder="Оберіть або вкажіть шлях до XML-файлу..." 
+                               IsReadOnly="True" />
+                        <Button Grid.Column="1" 
+                                Text="📁 Обрати файл" 
+                                Clicked="OnSelectFileClicked" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Блок 2: Критерії пошуку (Динамічна підгрузка даних) -->
+            <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="2. Параметри фільтрації (Підгрузка з файлу)" FontAttributes="Bold" FontSize="15"/>
+
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto" ColumnSpacing="15" RowSpacing="10">
+                        <!-- Факультет (динамічний випадаючий список) -->
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                            <Label Text="Факультет:" FontSize="13"/>
+                            <Picker x:Name="FacultyPicker" Title="Усі факультети" />
+                        </VerticalStackLayout>
+
+                        <!-- Кімната (динамічний випадаючий список) -->
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                            <Label Text="Кімната:" FontSize="13"/>
+                            <Picker x:Name="RoomPicker" Title="Усі кімнати" />
+                        </VerticalStackLayout>
+
+                        <!-- Курс -->
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="0">
+                            <Label Text="Курс:" FontSize="13"/>
+                            <Picker x:Name="CoursePicker" Title="Усі курси">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Усі курси</x:String>
+                                        <x:String>1 курс</x:String>
+                                        <x:String>2 курс</x:String>
+                                        <x:String>3 курс</x:String>
+                                        <x:String>4 курс</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </VerticalStackLayout>
+
+                        <!-- П.І.Б. студента або ключове слово -->
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+                            <Label Text="Пошук за П.І.Б. або словом:" FontSize="13"/>
+                            <Entry x:Name="KeywordEntry" Placeholder="Введіть фрагмент імені..." />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Блок 3: Вибір стратегії (Патерн Strategy) -->
+            <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="3. Метод аналізу XML (Патерн «Стратегія»):" FontAttributes="Bold" FontSize="15"/>
+                    <HorizontalStackLayout Spacing="25">
+                        <RadioButton x:Name="LinqRadio" Content="LINQ to XML" IsChecked="True" />
+                        <RadioButton x:Name="DomRadio" Content="DOM API" />
+                        <RadioButton x:Name="SaxRadio" Content="SAX API" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Блок 4: Кнопки управління -->
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                <Button Text="🔍 Виконати пошук" 
+                        BackgroundColor="#3182CE" 
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="OnSearchClicked" />
+
+                <Button Text="🧹 Очистити (Clear)" 
+                        BackgroundColor="#718096" 
+                        TextColor="White"
+                        Clicked="OnClearClicked" />
+
+                <Button Text="🌐 Трансформація в HTML" 
+                        BackgroundColor="#38A169" 
+                        TextColor="White"
+                        Clicked="OnTransformToHtmlClicked" />
+
+                <Button Text="❌ Вийти" 
+                        BackgroundColor="#E53E3E" 
+                        TextColor="White"
+                        Clicked="OnExitClicked" />
+            </HorizontalStackLayout>
+
+            <!-- Блок 5: Таблиця результатів -->
+            <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="ResultsCountLabel" 
+                           Text="Знайдено записів: 0" 
+                           FontAttributes="Bold" 
+                           FontSize="15"/>
+
+                    <CollectionView x:Name="ResultsCollectionView" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="#E2E8F0" StrokeShape="RoundRectangle 6" Padding="10" Margin="0, 4">
+                                    <VerticalStackLayout Spacing="3">
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Text="{Binding FullName}" FontAttributes="Bold" FontSize="16" TextColor="#2B6CB0"/>
+                                            <Label Text="[Староста]" TextColor="#DD6B20" FontAttributes="Bold" IsVisible="{Binding IsRoomHead}"/>
+                                        </HorizontalStackLayout>
+                                        <Label Text="{Binding GetInfo}" FontSize="13" TextColor="#4A5568"/>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

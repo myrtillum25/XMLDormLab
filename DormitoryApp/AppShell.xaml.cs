@@ -1,4 +1,4 @@
-﻿namespace DormintoryApp
+﻿namespace DormitoryApp
 {
     public partial class AppShell : Shell
     {
