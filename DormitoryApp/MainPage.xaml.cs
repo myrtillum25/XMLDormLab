@@ -58,8 +58,8 @@ public partial class MainPage : ContentPage
         PopulateDynamicFilters(path);
     }
 
-    // 2. ДИНАМІЧНА ПІДГРУЗКА ДАНИХ (Вимога завдання):
-    // Зчитує з обраного файлу унікальні факультети та кімнати і заповнює Picker-и
+    // 2. ДИНАМІЧНА ПІДГРУЗКА ДАНИХ:
+    // Зчитує з обраного файлу унікальні факультети та кімнати і заповнює пікери
     private void PopulateDynamicFilters(string xmlPath)
     {
         try
@@ -69,7 +69,7 @@ public partial class MainPage : ContentPage
             var doc = XDocument.Load(xmlPath);
             var students = doc.Descendants("Student").ToList();
 
-            // Збираємо унікальні факультети
+            // Факультети
             var faculties = students
                 .Select(s => (string?)s.Attribute("faculty"))
                 .Where(f => !string.IsNullOrWhiteSpace(f))
@@ -83,7 +83,7 @@ public partial class MainPage : ContentPage
                 FacultyPicker.Items.Add(fac);
             FacultyPicker.SelectedIndex = 0;
 
-            // Збираємо унікальні кімнати
+            // Кімнати
             var rooms = students
                 .Select(s => (string?)s.Attribute("roomNumber"))
                 .Where(r => !string.IsNullOrWhiteSpace(r))
@@ -97,7 +97,7 @@ public partial class MainPage : ContentPage
                 RoomPicker.Items.Add(room);
             RoomPicker.SelectedIndex = 0;
 
-            // Скидаємо курс
+            // Скидає курс
             CoursePicker.SelectedIndex = 0;
         }
         catch (Exception ex)
@@ -115,7 +115,7 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        // 1. Обираємо стратегію залежно від перемикача
+        // 1. Обирає стратегію залежно від перемикача
         if (DomRadio.IsChecked)
             searchContext.SetStrategy(new DomSearchStrategy());
         else if (SaxRadio.IsChecked)
@@ -123,7 +123,7 @@ public partial class MainPage : ContentPage
         else
             searchContext.SetStrategy(new LinqToXmlSearchStrategy());
 
-        // 2. Формуємо об'єкт фільтра
+        // 2. Формує об'єкт фільтра
         var filter = new SearchFilter();
 
         if (FacultyPicker.SelectedIndex > 0)
@@ -138,10 +138,10 @@ public partial class MainPage : ContentPage
         if (!string.IsNullOrWhiteSpace(KeywordEntry.Text))
             filter.Keyword = KeywordEntry.Text.Trim();
 
-        // 3. Виконуємо пошук через контекст
+        // 3. Виконує пошук через контекст
         List<Student> results = searchContext.ExecuteSearch(currentXmlPath, filter);
 
-        // 4. Відображаємо результати
+        // 4. Відображає результати
         ResultsCollectionView.ItemsSource = results;
         ResultsCountLabel.Text = $"Знайдено записів: {results.Count}";
 
@@ -151,7 +151,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // 4. ОЧИЩЕННЯ (Кнопка Clear за вимогою завдання)
+    // 4. ОЧИЩЕННЯ (Кнопка Clear)
     private void OnClearClicked(object sender, EventArgs e)
     {
         FacultyPicker.SelectedIndex = 0;
@@ -178,7 +178,6 @@ public partial class MainPage : ContentPage
 
             if (!File.Exists(xslPath))
             {
-                // Спробуємо в каталозі додатку
                 xslPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Transform.xsl");
             }
 
@@ -210,7 +209,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // 6. ПІДТВЕРДЖЕННЯ ПРИ ВИХОДІ (Вимога завдання)
+    // 6. ПІДТВЕРДЖЕННЯ ПРИ ВИХОДІ
     private async void OnExitClicked(object sender, EventArgs e)
     {
         bool answer = await DisplayAlert("Підтвердження", "Чи дійсно ви хочете завершити роботу з програмою?", "Так", "Ні");

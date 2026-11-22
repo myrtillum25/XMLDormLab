@@ -3,7 +3,7 @@ using DormitoryApp.Models;
 
 namespace DormitoryApp.Services;
 
-// 3. Стратегія пошуку через LINQ to XML (використовує XDocument та декларативні LINQ-запити)
+// 3. Стратегія пошуку через LINQ to XML
 public class LinqToXmlSearchStrategy : IXmlSearchStrategy
 {
     public List<Student> Search(string xmlPath, SearchFilter filter)

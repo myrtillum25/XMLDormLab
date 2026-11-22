@@ -13,7 +13,7 @@
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
 
-            <!-- Блок 1: Вибір XML файлу -->
+            <!-- Вибір XML файлу -->
             <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="1. Файл бази даних XML" FontAttributes="Bold" FontSize="15"/>
@@ -28,7 +28,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Блок 2: Критерії пошуку (Динамічна підгрузка даних) -->
+            <!-- Критерії пошуку (Динамічна підгрузка даних) -->
             <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="2. Параметри фільтрації (Підгрузка з файлу)" FontAttributes="Bold" FontSize="15"/>
@@ -71,7 +71,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Блок 3: Вибір стратегії (Патерн Strategy) -->
+            <!-- Вибір стратегії (Патерн Strategy) -->
             <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="3. Метод аналізу XML (Патерн «Стратегія»):" FontAttributes="Bold" FontSize="15"/>
@@ -83,7 +83,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Блок 4: Кнопки управління -->
+            <!-- Кнопки управління -->
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
                 <Button Text="🔍 Виконати пошук" 
                         BackgroundColor="#3182CE" 
@@ -107,7 +107,7 @@
                         Clicked="OnExitClicked" />
             </HorizontalStackLayout>
 
-            <!-- Блок 5: Таблиця результатів -->
+            <!-- Таблиця результатів -->
             <Border Stroke="#CBD5E0" StrokeShape="RoundRectangle 8" Padding="12">
                 <VerticalStackLayout Spacing="8">
                     <Label x:Name="ResultsCountLabel" 

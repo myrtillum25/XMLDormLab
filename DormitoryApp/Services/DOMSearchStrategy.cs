@@ -3,7 +3,7 @@ using DormitoryApp.Models;
 
 namespace DormitoryApp.Services;
 
-// 1. Стратегія пошуку через DOM (завантажує весь XML у пам'ять у вигляді дерева XmlDocument)
+// 1. Стратегія пошуку через DOM
 public class DomSearchStrategy : IXmlSearchStrategy
 {
     public List<Student> Search(string xmlPath, SearchFilter filter)

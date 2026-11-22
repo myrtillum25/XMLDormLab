@@ -3,7 +3,7 @@ using DormitoryApp.Models;
 
 namespace DormitoryApp.Services;
 
-// 2. Стратегія пошуку через SAX (потоковий послідовний XmlReader, що не вантажить увесь файл у пам'ять)
+// 2. Стратегія пошуку через SAX
 public class SaxSearchStrategy : IXmlSearchStrategy
 {
     public List<Student> Search(string xmlPath, SearchFilter filter)

@@ -7,7 +7,7 @@ public class XmlSearchContext
 {
     private IXmlSearchStrategy strategy;
 
-    // За замовчуванням ставимо LINQ to XML
+    // За замовчуванням LINQ to XML
     public XmlSearchContext(IXmlSearchStrategy? defaultStrategy = null)
     {
         strategy = defaultStrategy ?? new LinqToXmlSearchStrategy();
